@@ -9,6 +9,9 @@
 \usepackage{tikz-qtree}
 \usepackage{multicol}
 \usepackage[a4paper, total={19cm, 28cm}]{geometry}
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}[a4paper,landscape, border shrink=0mm]
+% \usepackage[landscape]{geometry}
 
 \lstset{
 language=sql,
@@ -262,7 +265,6 @@ We say that an inclusion dependency holds when $R(A_1, \ldots, A_n) \subseteq S(
 
 In other words, a \textit{foreign key} is a tuple that uniquely identifies a row in another table.
 
-\filbreak
 \subsection{Keys}
 
 Intersects with the \textit{Dependencies} section above.
@@ -337,7 +339,6 @@ Returns all records that are in the left or right table, but does \underline{not
 
 Similar to the natural join found in relational algebra, where the join is based upon common columns in the two tables.
 
-\filbreak
 \subsection{Aggregate Functions}
 
 Some examples of \textit{aggregate functions} would be the \texttt{COUNT} and \texttt{SUM} functions. Care needs to be taken with aggregate functions as SQL tends to keep \textit{duplicates} unless explicitly mentioned otherwise.
@@ -483,15 +484,47 @@ Where event can be one of \texttt{\textbf{INSERT, UPDATE, DELETE}}
           END ;
     \end{lstlisting}
 
+\subsection{\texttt{\textbf{NULL}}}
+Depends on the context, \texttt{NULL} can mean: \begin{itemize}
+  \item \textbf{Missing Value}: there is a value currently unknown
+        \subitem Example: We forgot John's phone number
+  \item \textbf{Non-applicable}: there is no nothing (undefined)
+        \subitem Example: John has no phone, so he doesn't have a number
+\end{itemize}
+
+However, it can also behaved as: \begin{itemize}
+  \item \textbf{Constants}: like other values
+        \subitem Example: There is no apple in the basket
+  \item \textbf{Unknown}: a truth-value in addition to True and False
+        \subitem Example: I don't know the lecturer's age
+\end{itemize}
 
 \subsection{Cursor}
 
-A temporary portion of memory that used for executing a SQL statement. The set of rows that this statement returns is referred to as the cursor's \textit{active set}.
+A cursor allows a programming language to operate on collection of rows.
 
-An \textit{implicit} cursor is used for \texttt{INSERT}, \texttt{UPDATE} and \texttt{DELETE} statements, as well as \texttt{SELECT} statements that return just one row.
+Cursors are defined in the SQL standard
 
-An \textit{explicit} cursor is used for \texttt{SELECT} statements that return more than one row.
+\subsubsection*{Cursor declaration}
+\texttt{\textbf{DECLARE} cursorname \textbf{CURSOR FOR} query}
 
+\subsubsection*{Python example}
+\begin{verbatim}
+  import psycopg2
+  # create a connection to the database
+  conn = psycopg2.connect('dbname=dbscourse host=pgteach')
+  
+  # get a cursor
+  cur = conn.cursor()
+  # execute an SQL query
+  q = 'SELECT COUNT(*) FROM dbs17.students'
+  cur.execute(q)
+  # print result
+  print cur.fetchone()[0]
+  # close cursor and connection
+  cur.close()
+  conn.close()
+\end{verbatim}
 \section{Relational Calculus}
 
 Also known as \textit{first-order predicate logic}. \textit{Safe} relational calculus is equally as expressive as relational algebra.
@@ -768,8 +801,8 @@ A schedule is serial if all operations of each transaction are executed before o
       T_1&: \text{op1, op2, op3}\\
       T_2&: \text{op1, op2}
     \end{split}\]
-    \linebreak
-    \linebreak
+  \linebreak
+  \linebreak
   \begin{center}
     Concurrent schedule\\
     \begin{tabular}{c|c|c}
@@ -778,7 +811,7 @@ A schedule is serial if all operations of each transaction are executed before o
       2 & op1   &       \\
       3 & op2   &       \\
       4 &       & op2   \\
-      5 & op3   &\\
+      5 & op3   &       \\
     \end{tabular}
   \end{center}
   \begin{center}
@@ -936,18 +969,29 @@ Fields in a log record:
         \end{itemize}
 \end{enumerate}
 
-\section{XML: Extensible Markup Language}
+\section{Data Storage and Indexing}
+\subsection{Files, records and pages}
+Each table is stored on disk in a file of records
 
-XML is a format that is both \textit{human} and \textit{machine readable} and describes the structure of data.
+\textbf{Record}: memory area (bits sequence) logically devided in Fields
+\\Each record in a file: \begin{itemize}
+  \item corresponds to a row of values in the table
+  \item has same number of fields but not necessarilt the same length
+  \item has unique identifier: record id (rid)
+\end{itemize} 
 
-XML doesn't define how data should be displayed, rather it provides a \textit{model} for other applications to display it. This means that XML doesn't actually ``\textit{do}'' anything, and depends on some other application to do something with it.
+Files are organized in \textbf{pages}: block of fixed size memory, where the page size is a parameter of the DBMS
 
-A similar language is HTML, which describes how data looks. XML focuses upon what data actually \textit{is}.
+When data is requested for computation pages must be fetched from disk and loaded in main memory
 
-XML allows for a developer to describe things, and ascribe \textit{attributes} to them. This allows for a tree to be drawn representing the hierarchy.
+\subsection{File of records}
+A file of records supports the following operations: \begin{itemize}
+  \item insertion of records
+  \item deletion of records
+  \item Modification of records
+  \item Scan all records, return one at a time
+\end{itemize}
 
-\subsection{DTD: Document Type Definition}
-
-A DTD is \textit{grammar} that can be used in conjunction with XML documents, dictating which type of data some attribute can hold, what attributes an item has, and so on.
+Read remaining I'm tired and sleepy
 
 \end{document}

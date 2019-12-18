@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2019.11.5)  18 DEC 2019 03:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2019.11.5)  18 DEC 2019 13:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -441,36 +441,63 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen260
 \Gm@layoutvoffset=\dimen261
 \Gm@dimlist=\toks36
-) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfpages.sty
+Package: pgfpages 2011/01/05 ver 0.02
+ (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count146
+\calc@Bcount=\count147
+\calc@Adimen=\dimen262
+\calc@Bdimen=\dimen263
+\calc@Askip=\skip48
+\calc@Bskip=\skip49
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count148
+\calc@Cskip=\skip50
+)
+\pgf@logicalpages=\count149
+\pgf@firstshipout=\count150
+\pgf@lastshipout=\count151
+\pgf@currentshipout=\count152
+\pgf@cpn=\count153
+\pgf@shipoutnextto=\count154
+\pgfphysicalheight=\dimen264
+\pgfphysicalwidth=\dimen265
+\pgfpages@shipoutbox=\box69
+)
+\pgfpages@box@1=\box70
+\pgfpages@box@2=\box71
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) (/home/ian/Documents/Database System/notes.aux)
 \openout1 = `notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-\c@lstlisting=\count146
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+\c@lstlisting=\count155
  ABD: EveryShipout initializing macros (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count147
-\scratchdimen=\dimen262
-\scratchbox=\box69
-\nofMPsegments=\count148
-\nofMParguments=\count149
+\scratchcounter=\count156
+\scratchdimen=\dimen266
+\scratchbox=\box72
+\nofMPsegments=\count157
+\nofMParguments=\count158
 \everyMPshowfont=\toks37
-\MPscratchCnt=\count150
-\MPscratchDim=\dimen263
-\MPnumerator=\count151
-\makeMPintoPDFobject=\count152
+\MPscratchCnt=\count159
+\MPscratchDim=\dimen267
+\MPnumerator=\count160
+\makeMPintoPDFobject=\count161
 \everyMPtoPDFconversion=\toks38
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -526,70 +553,73 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 28.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 31.
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 32.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 35.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+)
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <8> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 123.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 186.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 126.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 189.
  (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 186.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 189.
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 186.
- [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 257--258
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 189.
+ [3
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 260--261
 
  []
 
-[4] [5] [6] [7] [8] [9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 713--714
+[5]
+LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <12> not available
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 487.
+ [7] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 746--747
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 715--716
+Underfull \hbox (badness 10000) in paragraph at lines 748--749
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 770--773
+Underfull \hbox (badness 10000) in paragraph at lines 803--806
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 770--773
+Underfull \hbox (badness 10000) in paragraph at lines 803--806
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 770--773
+Underfull \hbox (badness 10000) in paragraph at lines 803--806
 
  []
 
-[12] [13] [14] (/home/ian/Documents/Database System/notes.aux) ) 
+[13] [15] (/home/ian/Documents/Database System/notes.aux) ) 
 Here is how much of TeX's memory you used:
- 15500 strings out of 492167
- 289540 string characters out of 6127803
- 556823 words of memory out of 5000000
- 19549 multiletter control sequences out of 15000+600000
- 13037 words of font info for 51 fonts, out of 8000000 for 9000
+ 15745 strings out of 492167
+ 295457 string characters out of 6127803
+ 619125 words of memory out of 5000000
+ 19787 multiletter control sequences out of 15000+600000
+ 13552 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,17n,54p,851b,1615s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,17n,54p,851b,1613s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on "/home/ian/Documents/Database System/notes.pdf" (14 pages, 289072 bytes).
+Output written on "/home/ian/Documents/Database System/notes.pdf" (7 pages, 284817 bytes).
 PDF statistics:
- 138 PDF objects out of 1000 (max. 8388607)
- 100 compressed objects within 1 object stream
+ 116 PDF objects out of 1000 (max. 8388607)
+ 85 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
