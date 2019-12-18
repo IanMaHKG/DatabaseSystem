@@ -1,0 +1,951 @@
+\documentclass{article}
+
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage{newlfont}
+\usepackage{courier}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{multicol}
+
+
+\lstset{
+language=sql,
+basicstyle=\footnotesize\ttfamily
+}
+
+% If and only if
+\def\biconditional{$\leftrightarrow\;$}
+
+\begin{document}
+\pagestyle{headings}
+
+% Title declaration
+\title{Database Systems Notes}
+\date{}
+\maketitle
+
+\section{Relational Algebra}
+
+Relation algebra can express the same statements as SQL \texttt{SELECT-FROM-WHERE} statements.
+
+\begin{center}
+  \begin{tabular}{|c|c|}
+    \hline
+    $\pi$        & Projection                         \\
+    \hline
+    $\sigma$     & Selection                          \\
+    \hline
+    $\times$     & (\textit{Cartesian/Cross}) Product \\
+    \hline
+    $\rho$       & Renaming                           \\
+    \hline
+    $\bigcup$    & Union                              \\
+    \hline
+    $\bigcap$    & Intersection                       \\
+    \hline
+    $\backslash$ & Difference                         \\
+    \hline
+    -            & Difference                         \\
+    \hline
+    $\Join$      & Natural Join                       \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsubsection*{$\pi$: Projection}
+
+Projection is a \textit{vertical} operation, allowing you to choose some \textit{columns}.
+
+\textbf{Syntax}:
+
+$\pi_{\text{Set of Attributes}}(\text{relation})$
+
+Any set of attributes not mentioned by the projection are discarded.
+
+\subsubsection*{$\sigma$: Selection}
+
+Selection is a \textit{horizontal} operation, allowing you to choose \textit{rows that satisfy a condition}.
+
+\textbf{Syntax}:
+
+$\sigma_{\text{Condition}}(\text{Relation})$
+
+This provides users with a \textit{view} of data, hiding rows that do not satisfy the condition.
+
+Consecutive selections are the same as a conjunction of the conditions in one selection; however, they can bring around different levels of performance. Consecutive selections are performed sequentially and eliminate rows that do not meet the criteria, whereas the conjunction means that the selection is performed once with a stricter condition.
+
+\subsubsection*{$\times$: Cartesian Product}
+
+Where each row of two relations is \textit{concatenated} to produce a new relation.
+
+\textbf{Syntax}:
+
+$\text{A Relation} \times \text{Another Relation}$
+
+A Cartesian product is the product of the two relations' sizes; meaning that Cartesian products can balloon in size.
+
+\subsubsection*{$\rho$: Renaming}
+
+A useful tool that \textit{aids} Cartesian products where the two relations have columns that go by the same name.
+
+For example, a bank may have a table for all of a customer's accounts, and another table for all accounts open at some branch. These two tables could have a selection performed upon them to find all of a customer's accounts across all branches, but they both have an account name column. Renaming one allows for them to be distinguishable.
+
+$\rho_{A \rightarrow B}(\text{R})$ means renaming column $A$ to column $B$ in relation $R$
+
+\subsubsection*{$\Join$: Natural Join}
+
+Joining two tables on \textit{common attributes}.
+
+$ R \Join S = \pi_{X\cup Y}(\sigma_{X_z = Y_z'}(R \times \rho_{Y_z \rightarrow Y_z'} S))$
+
+\subsection*{$\Join_\theta$ :Theta-join}
+$R \Join_\theta S = \sigma_\theta(R\times S)$
+
+\subsubsection*{Semijoin}
+$R \:\textbf{semijoin}_\theta\: S = \pi_{X} (R \Join_\theta S)$ where $X$ is the set of schema of $R$
+
+\subsubsection*{Antijoin}
+$R \:\textbf{antijoin}_\theta\: S = R - (R \:\textbf{semijoin}_\theta\: S)$
+
+\subsection*{Division}
+Let $R$ over $X$ and $S$ over $Y \subset X$ \\
+Let $Z = X-Y$\\
+$R \div S = \pi_z(R) - \pi_Z(\pi_Z(R) \times S - R)$
+
+\section{SQL}
+
+All queries have the general format:
+
+\begin{lstlisting}
+    SELECT list, of, attributes
+    FROM list, of, relations
+    WHERE conditions
+\end{lstlisting}
+
+\texttt{WHERE} statements allow for tables to be \textbf{joined}.
+
+Two relations can also be joined upon a condition, and are referred to as a \textit{theta-join}. This is denoted as $R \underset{\theta}{\Join} S$. Theta-joins are essentially Cartesian-products with a condition subsequently applied to it, such that:
+
+\[ R \underset{\theta}{\Join} S \equiv \sigma(R \times S) \]
+
+\subsection{Table Management}
+
+\subsubsection*{Creating a Table}
+
+\begin{lstlisting}
+  CREATE TABLE name (
+       name type(size),
+       .
+       .
+       .
+  );
+\end{lstlisting}
+
+\subsubsection*{Adding Entries to a Table}
+
+\begin{lstlisting}
+  INSERT INTO name VALUES
+      (val1, val2, val3);
+\end{lstlisting}
+
+\subsubsection*{Altering a Table's Attributes}
+
+\begin{lstlisting}
+  ALTER TABLE name
+      ADD COLUMN name type
+      DROP COLUMN name;
+\end{lstlisting}
+
+\subsubsection*{Changing Values in a Table}
+
+\begin{lstlisting}
+  UPDATE table
+  SET newValue
+  WHERE condition;
+\end{lstlisting}
+
+\subsubsection*{Removing Entries from a Table}
+
+\begin{lstlisting}
+  DELETE FROM name
+      WHERE condition;
+\end{lstlisting}
+
+\subsubsection*{Deleting a Table}
+
+\begin{lstlisting}
+  DROP TABLE name;
+\end{lstlisting}
+
+
+\subsection{Basic constraints}
+\begin{itemize}
+  \item \texttt{\textbf{NOT NULL}} to disallow null(empty) vallues
+  \item \texttt{\textbf{UNIQUE}} to declare keys to be unique
+  \item \texttt{\textbf{PRIMARY KEY}} unique and not null
+  \item \texttt{\textbf{FOREIGN KEY}} to reference attribute in other tables, so if the value doesn't exist on another table's column then the input will be rejected
+  \item \texttt{\textbf{DEFAULT}} to define the value if not defined by input
+\end{itemize}
+
+
+\subsection{Union Compatibility}
+
+Sometimes straightforward queries in English are a little more complicated than they are in relational algebra and in SQL.
+
+\subsection{Nested Queries}
+
+A nested query is also referred to as a \textit{subquery} or a \textit{inner} query.
+
+This allows for a condition to be checked across both the main query, and the sub query.While this can be achieved by using joins, nested queries can be ideal for situations that have complex predicates.
+
+\subsubsection*{\texttt{EXISTS}}
+
+This type of subquery tells you whether a given query \textit{returns} any results. This is ideal when the subquery may return a large result set, as it will return true as soon as a result is returned.
+
+\texttt{EXISTS} can be negated using \texttt{NOT EXISTS}
+
+\subsubsection*{\texttt{IN}}
+
+Similar to \texttt{EXISTS}, but is ideal when the subquery yields a small result, or in a small static list. This is because instead of reporting whether a result has been returned, it instead directly compares values.
+\texttt{IN} can be negated using \texttt{NOT IN}
+
+\subsubsection*{\texttt{ANY}}
+\begin{lstlisting}
+    list_of_terms OP ANY(query)
+  \end{lstlisting}
+True if $\exists$ a row $r$ in the result of query such that lisy\_of\_terms op $r$ is true.
+\begin{itemize}
+  \item 3 $<$ \texttt{\textbf{ANY}}({1,2,3}) is false
+  \item 3 $<$ \texttt{\textbf{ANY}}({1,2,4}) is True
+\end{itemize}
+
+\subsubsection*{\texttt{ALL}}
+(term,...,term) \textbf{op} \texttt{\textbf{ALL}} (query)\\
+True if $forall$ rows in the results of query is true
+\begin{itemize}
+  \item 3 $<$ \texttt{\textbf{ALL}}(4,5,6) is true
+  \item 3 $<$ \texttt{\textbf{ALL}}(3,5,6) is false
+\end{itemize}
+
+\subsection{Dependencies}
+
+The most common dependencies are \textit{functional} and \textit{inclusion} dependencies.
+
+\subsubsection*{Functional Dependencies}
+
+Consider a relation $R$ that has attributes $X$ and $Y$. $Y$ would be functionally dependent on $X$ \textit{iff} each value in $X$ is associated with one value in $Y$. This is denoted $X \implies Y$.
+
+$$\pi_X(t_1) = \pi_X(t_2) \Rightarrow pi_Y(t_1) = \pi_Y(t_2)$$
+
+Consider a database that holds \textit{National Insurance} numbers and \textit{employee names}. We would say that the \textit{employee names} attribute is \underline{functionally dependent on} the \textit{National Insurance} numbers attribute. This is because the \textit{National Insurance} number is \textit{unique} to one person, whereas more than one person can have the same name.
+
+So, say we have some set, $U$, containing all attributes of the relation $R$. The subset $K$ of $U$ is a \textit{key} for $R$ if satisfies the functional dependency $K \implies U$.
+
+A \textit{key} allows us to \textit{uniquely identify} a tuple in a relation.
+
+A key will \underline{always} exists for any relation.
+
+\subsubsection*{Inclusion Dependency}
+
+Beware; many \textbf{WORDS} appear in this section.
+
+A key concept of this kind of dependency is \textit{referential integrity}. This is when we expect that \underline{all} values of some attribute in one table, all \underline{exist in some other} table.
+
+Referential integrity describes \textit{inclusion dependencies}.\\
+
+$R$ and $S$ satisfy $R[X] \subseteq S[Y]$ if $\forall t_1 \in R \: \exists t_2\in S $ such that $\pi_X(t_1) = \pi_Y(t_2)$
+
+We say that an inclusion dependency holds when $R(A_1, \ldots, A_n) \subseteq S(B_1, \ldots, B_n)$; that if a tuple exists in $R$, then that exact tuple appears in $S$. These are referenced to as \textit{foreign keys}, referencing $B_1, \ldots, B_n$ as the key for $S$.
+
+In other words, a \textit{foreign key} is a tuple that uniquely identifies a row in another table.
+
+\filbreak
+\subsection{Keys}
+
+Intersects with the \textit{Dependencies} section above.
+
+\subsubsection*{Superkey}
+
+A column, or set of columns, that can be used to uniquely identify a row within a table.
+
+\subsubsection*{Candidate Keys}
+
+A column or set of columns that is \textit{minimal} and can be used to \textit{uniquely identify} all records within a database.
+
+\subsubsection*{Primary Keys}
+
+A \textit{primary key} is a candidate key that \textit{uniquely identify} all of a table's records. A primary \textit{cannot be null} and must contain a \textit{unique value for each row of data}.
+
+This type of key is critical for relational databases to work as a concept. In SQL, the primary key can be defined in two ways.
+
+\textit{After a variable declaration}:
+
+\begin{lstlisting}
+  CREATE TABLE Student (
+       name varchar(50),
+       uun integer PRIMARY KEY
+  );
+\end{lstlisting}
+
+\subsubsection*{Compound Keys}
+Literally means primary key using multiple schema/attributes
+
+\begin{lstlisting}
+  CREATE TABLE Movies (
+       m_title varchar(30),
+       m_director varchar(30),
+       m_year smallint,
+       m_genre varchar(30),
+       PRIMARY KEY (m_title,m_year)
+       );
+\end{lstlisting}
+
+The latter would be referred to as having a \textit{compound primary key}.
+
+A primary key does not allow for tuples to be inserted in to the table if they are the same as the primary key.
+
+SQL allows for a key to be declared as \texttt{UNIQUE}, and is very similar to the \texttt{PRIMARY KEY} but \texttt{UNIQUE} still allows for null entries.
+
+\subsubsection*{Foreign Keys}
+
+How \textit{referential integrity} is enforced in SQL.
+
+Say we have two tables created, we can declare a \textit{foreign key} by stating that some attribute or attributes \texttt{REFERENCES} attributes in another table. So the value will be rejected if it does not exist on the referenced column/schema
+
+\subsection{Joins}
+
+\subsubsection*{Inner Join}
+
+Similar to a logical \texttt{AND}, only records found in \underline{both} tables will be returned.
+
+\subsubsection*{Outer Join}
+
+The inverse to an inner join, an outer join will return records that are \underline{not in both} tables. Similar to a logical \texttt{XOR}.
+
+\subsubsection*{Left/Right Join}
+
+Returns all records that are in the left or right table, regardless if there is a record in the opposite table or not. If the is no equivalent equal record in the other table, a value of \texttt{NULL} shall be returned in that field instead.
+
+\subsubsection*{Left/Right Outer Join}
+
+Returns all records that are in the left or right table, but does \underline{not} match any record the opposite table.
+
+\subsubsection*{Natural Join}
+
+Similar to the natural join found in relational algebra, where the join is based upon common columns in the two tables.
+
+\filbreak
+\subsection{Aggregate Functions}
+
+Some examples of \textit{aggregate functions} would be the \texttt{COUNT} and \texttt{SUM} functions. Care needs to be taken with aggregate functions as SQL tends to keep \textit{duplicates} unless explicitly mentioned otherwise.
+
+Aggregate functions can also affect the way that results are returned.
+
+\subsubsection*{Group By}
+
+\texttt{GROUP BY} can sometimes seem to work in an underhanded way. Group by can point out to an aggregate function, on \textit{what basis should attributes be aggregated}.
+
+For example, say we have a table that details purchases made by customers on a website, and we want to find out how much each customer has spent.
+
+The following SQL query would suffice:
+
+\begin{lstlisting}
+  SELECT name, SUM(amount)
+      FROM sales
+      GROUP BY name;
+\end{lstlisting}
+
+\subsubsection*{Having}
+\texttt{Having} can be used to filtering out unwanted data/rows that does not meeting the followwed criteria/criterion
+\begin{lstlisting}
+  SELECT name, SUM(amount)
+      FROM sales
+      GROUP BY name
+      HAVING name = "Ian";
+\end{lstlisting}
+This will filter out the customers whose name are not Ian
+
+\subsection{Other bits of SQL}
+\subsubsection*{Order By}
+
+\texttt{ORDER BY} simply re-orders some output of an SQL query.
+\begin{lstlisting}
+  SELECT *
+      FROM Accounts
+      ORDER BY custid DESC, balance ASC;
+\end{lstlisting}
+This will retuen the Account table with customer id in descending order and balance in accending order if there are any dublicated customer id
+
+\subsubsection*{Casting}
+\begin{lstlisting}
+  CAST ( term AS type)
+\end{lstlisting}
+Example: \texttt{\textbf{CAST}}(102,2475 \texttt{\textbf{AS NUMERIC}}(5,2)) returns 102.47
+
+\subsection*{Conditional expressions}
+\begin{lstlisting}
+  SELECT CASE WHEN condition THEN expressions
+              ELSE  expressions END
+  FROM table
+\end{lstlisting}
+Example:
+\begin{lstlisting}
+  SELECT CASE WHEN a IS NULL THEN 0
+              ELSE  a END
+  FROM r
+\end{lstlisting}
+This will replace all a which are null to 0 form table r
+
+\subsubsection*{Pattern matching}
+\begin{lstlisting}
+    term LIKE pattern
+  \end{lstlisting}
+return list where term matches the pattern, a patter are form by characters(case sensitive), uderscore matching any one characters, and percent matching any substring including empty
+
+
+\subsection{Constraints}
+\subsubsection*{\texttt{\textbf{CHECK}}}
+Update/insertion is rejected if the condition evaluates to false
+
+\begin{lstlisting}
+    CREATE TABLE Products (
+      pcode   INTEGER PRIMARY KEY,
+      pname   VARCHAR(10),
+      pdesc VARCHAR(20),
+      ptype VARCHAR(20),
+      price NUMERIC(6,2) CHECK ( price > 0 ),
+      CHECK ( ptype IN ('BOOK','MOVIE','MUSIC') )
+    );
+  \end{lstlisting}
+This will reject the insertion/update if ptype is neither BOOK, MOVIE nor MUSIC
+
+\subsubsection*{\texttt{\textbf{DOMAIN}}}
+A domain is essentially a data type with optional Constraints
+
+\begin{lstlisting}
+    CREATE DOMAIN posnumber NUMERIC(10,2)
+        CHECK ( VALUE > 0 );
+    CREATE DOMAIN category VARCHAR(20)
+        CHECK ( VALUE IN ('BOOK', 'MUSIC', 'MOVIE') );
+
+    CREATE TABLE Products (
+      pcode   INTEGER PRIMARY KEY,
+      pname   VARCHAR(10),
+      pdesc   VARCHAR(20),
+      ptype   category,
+      price   posnumber,
+    );
+  \end{lstlisting}
+
+\subsubsection*{\texttt{\textbf{ASSERTION}}}
+Essentially a \texttt{\textbf{CHECK}} constraint not bound to a specific table\\
+Syntax: \texttt{\textbf{CREATE ASSERTION} name \textbf{CHECK} (condition)}
+
+\begin{lstlisting}
+      CREATE ASSERTION too_many_customers
+          CHECK ( ( SELECT COUNT(*)
+              FROM customers ) <= 1000 ) ;
+    \end{lstlisting}
+
+\subsection{Triggers}
+\textbf{Syntax}:
+\begin{lstlisting}
+      CREATE TRIGGER name
+          { BEFORE | AFTER } event ON table_name
+          FOR EACH { ROW | STATEMENT }
+          WHEN ( condition )
+          EXECUTE PROCEDURE function_name ( arguments )
+    \end{lstlisting}
+
+Where event can be one of \texttt{\textbf{INSERT, UPDATE, DELETE}}
+
+\textbf{Example}
+\begin{lstlisting}
+      CREATE TRIGGER invoice_order
+          AFTER UPDATE OF final ON orders
+          REFERENCING OLD ROW AS oldrow
+                      NEW ROW AS newrow
+          FOR EACH ROW
+          WHEN oldrow.final = FALSE AND newrow.final = TRUE
+          BEGIN
+              INSERT INTO invoices(ordid,amount,issued,due)
+              SELECT O.ordid, SUM(D.qty * P.price),
+                     O.odate, O.odate+7d
+
+              FROM orders O, details D, prices P
+              WHERE O.ordid = newrow.ordid
+                  AND O.ordid = D.ordid
+                  AND D.ordid = P.ordid
+                  AND D.pcode = P.pcode
+          END ;
+    \end{lstlisting}
+
+
+\subsection{Cursor}
+
+A temporary portion of memory that used for executing a SQL statement. The set of rows that this statement returns is referred to as the cursor's \textit{active set}.
+
+An \textit{implicit} cursor is used for \texttt{INSERT}, \texttt{UPDATE} and \texttt{DELETE} statements, as well as \texttt{SELECT} statements that return just one row.
+
+An \textit{explicit} cursor is used for \texttt{SELECT} statements that return more than one row.
+
+\section{Relational Calculus}
+
+Also known as \textit{first-order predicate logic}. \textit{Safe} relational calculus is equally as expressive as relational algebra.
+
+Relational calculus consists of:
+
+\begin{center}
+  \begin{tabular}{|c|c|}
+    \hline
+    Relation Names  & \textit{Customers, Accounts}             \\
+    \hline
+    Constants       & \textit{'London'}                        \\
+    \hline
+    Constraints     & $\wedge, \vee, -$                        \\
+    \hline
+    Quantifiers     & $\exists, \forall$                       \\
+    \hline
+    Bound Variables & $\exists x, \forall x$                   \\
+    \hline
+    Free Variables  & \textit{No quantifiers placed upon them} \\
+    \hline
+  \end{tabular}
+\end{center}
+
+When a query is without free variables, it is referred to as a \textit{boolean query}.
+
+A query is \textit{safe} when it is known to give a finite answer across all databases.
+
+The \textit{active domain} of a table is the set of all its constants.
+
+\section{Translations}
+
+\subsection{Relational Algebra to Relational Calculus}
+
+\subsubsection*{Base Relation}
+
+$R$ over $X_1,...,X_n$ becomes $R(x_1, \ldots, x_n)$
+
+\subsubsection*{Renaming}
+$\rho_{A\rightarrow B}(R)$ where $R$ over $A$ is translated to $R(x_B)$
+
+\subsubsection*{Selection}
+$\sigma_{\theta} R$ becomes $R(x_1, \ldots, x_n) \wedge \theta$.
+
+\subsubsection*{Projection}
+$\pi_{\alpha}(R)$ where $R$ over $\beta \supset \alpha$ becomes $\exists (\beta-\alpha) R(\beta)$
+
+\subsubsection*{Product}
+$R \times S$ becomes $R(x_1, \ldots, x_n) \wedge S(y_1, \ldots, y_n)$.
+
+\subsubsection*{Union}
+$R \cup S$ becomes $R(x_1, \ldots, x_n) \vee S(x_1, \ldots, x_n)$.
+
+\subsubsection*{Difference}
+$R - S$ becomes $R(x_1, \ldots, x_n) \wedge \neg S(x_1, \ldots, x_n)$.
+
+\subsection{Relational Calculus to Relational Algebra}
+\subsubsection*{Predicate}
+$R(x_1, ... ,x_n)$ is translated to $\rho_{X_{x_1}, ... X_{x_m}}(R)$
+
+\subsubsection*{Existential Quantification ($\exists$)}
+$\exists x \: R$ is translated to $\pi_{\beta - x}(R)$ where $x \subset \beta$
+
+\subsubsection*{Comparations}
+let $\mathbf{op} = \{=,>,<,...\}$\\
+$x \:\mathbf{op}\: y$ is translated to $\sigma_{A_x \:\mathbf{op}\: A_y} (\mathbf{Adom}_{A_x}\times\mathbf{Adom}_{A_y})$ if $y$ is a schema\\
+$x \:\mathbf{op}\: y$ is translated to $\sigma_{A_x \:\mathbf{op}\: y} (\mathbf{Adom}_{A_x})$ if $y$ is a constant
+
+\subsubsection*{Negation}
+$\neg R$ is translated to $(\times_{\times \in \beta} \mathbf{Adom}_{A_x}) - R$
+
+\subsubsection*{Disjunction}
+$R \vee S$ is translated to $R \times (\times_{x \in \beta_S - \beta_R} \textbf{Adom}_x) \cup S \times (\times_{x \in \beta_R - \beta_S} \textbf{Adom}_x)$
+
+\subsubsection*{Conjunction}
+$R \wedge S$ is translated to $R \times (\times_{x \in \beta_S - \beta_R} \textbf{Adom}_x) \cap S \times (\times_{x \in \beta_R - \beta_S} \textbf{Adom}_x)$
+
+\subsection{Active Domain}
+$$\textbf{Adom}(R) = \rho_{A_1\rightarrow A}(\pi_{A_1}(R))\cup ... \cup \rho_{A_n\rightarrow A}(\pi_{A_n}(R))$$
+$$\textbf{Adom}(D) = \bigcup_{R\in D}\text{Adom}(R)$$
+
+
+\section{Multisets and Aggregation}
+\subsection{Set vs. Multiset}
+We consider relation algebra on \textbf{sets} (no deplicating rows/elements) while SQL uses \textbf{bags/multisets}(sets with duplicates)
+
+\subsection{Notations}
+\begin{itemize}
+  \item $a \in_k B$: $a$ occurs $k$ times in bag $B$
+  \item $a \in_ B$: $a$ occurs in bag $B$ with multiplicity $\geq 1$
+  \item $a \notin k B$: $a$ does not ccur in bag $B$
+\end{itemize}
+
+\subsection{Relation algebra on bags}
+\subsubsection*{Dublicate elimination $\epsilon$}
+If $\bar{a} \in R$ then $\bar{a}\in_1\epsilon(R)$
+\subsubsection*{Union}
+If $\bar{a} \in_h R \wedge \bar{a}\in_k S$, then $\bar{a} \in_{h+k} R\cup S$
+\subsubsection*{Intersection}
+If $\bar{a} \in_h R \wedge \bar{a}\in_k S$, then $\bar{a} \in_{\min(h,k)} R\cap S$
+\subsubsection*{Difference}
+If $\bar{a} \in_h R \wedge \bar{a}\in_k S$, then
+$$\begin{cases}
+    \bar{a} \in_{h-k} R-S \text{ if } k > n \\
+    \bar{a} \notin R-S\text{ otherwise}
+  \end{cases}$$
+
+\section{Database Normalisation}
+
+\textit{Data redundancy} is when the same piece of data is held in two or more separate places. Developers ideally want to be able to update all instances of some piece of data through one central access point, as it becomes an issue when one piece of data becomes inconsistent across several relations.
+
+\textit{Database normalisation} has the aim of minimising data redundancy, when some database schema is reduced into \textit{normal form}.
+
+\subsection{1NF: First Normal Form}
+
+Criteria:
+
+\begin{itemize}
+  \item Repeating groups in a relation are eliminated
+  \item A separate table for each set of related data, identified by a primary key
+\end{itemize}
+
+\subsection{2NF: Second Normal Form}
+
+Criteria:
+
+\begin{itemize}
+  \item
+        The table must be in \textit{1NF}
+  \item
+        There should be no partial dependencies on any attributes of the primary key
+\end{itemize}
+
+This means that any of these attributes that are not a part of the primary key, but are directly related to that part of the primary key, should be placed in a different table.
+
+For example, if we have a list that consists of \texttt{Manufacturer}, \texttt{Model} and \texttt{Manufacturer Country}; \texttt{Manufacturer Country} should be placed in a different table - because it is not a candidate key, but is directly dependent on \texttt{Manufacturer} - which would leave the relations in \textit{2NF}.
+
+\subsection{3NF: Third Normal Form}
+
+$(U,F)$ is in 3NF if for every FD $X \rightarrow Y$ in $F$ one of the following holds:
+\begin{itemize}
+  \item $Y \subseteq X$ (trival FD)
+  \item $X$ is a key
+  \item all attributes in $Y$ are prime
+\end{itemize}
+Every schema in BNCF is also in 3NF
+
+\subsubsection*{3NF synthesis algorithm}
+\textbf{Input}: A set of attributes $U$ and FDs $F$\\
+\textbf{Output}: A database schema $S$
+
+\begin{enumerate}
+  \item $S:= \emptyset$
+  \item Find a minimal cover $G$ of $F$
+  \item Replace all FDs $X \rightarrow A_1,..., X\rightarrow A_n$ in $G$ by $X \rightarrow A_1...A_n$
+  \item For each FD $(X\rightarrow Y) \in G$, add $(XY,X\rightarrow Y)$ to $S$
+  \item If no $(U_i,F_i)$ in $S$ such that $U_i$ is a key for $(U,F)$, find a key $K$ for $(U,F)$ and add $(K,\emptyset)$ to $S$
+  \item If $S$ contains $(U_i,F_i)$ and $(U_j,F_j)$ with $(U_i \subseteq U_j)$, replace them by $(U_j,F_i\cup F_j)$
+  \item Output $S$
+\end{enumerate}
+
+\subsubsection*{Properties of the 3NF algorithm}
+The syntheized schema is
+\begin{itemize}
+  \item in 3NF
+  \item lossless-join
+  \item dependency-preserving
+\end{itemize}
+
+\subsection{BCNF: Boyce-Codd Normal Form(BCNF)}
+
+\textbf{Definition}: A relation with FDs $F$ is in BCNF if for every $X \rightarrow Y$ in $F$:
+\begin{itemize}
+  \item $Y \subseteq X$, or
+  \item $X$ is a key
+\end{itemize}
+
+A database is in BCNF if all relations are in BCNF
+
+\subsubsection*{Decomposition}
+Given set of attributes $U$ and set of FDs $F$, a decomposition of $(U,F)$ is a set $(U_1,F_1),...,(U_n,F_n)$ such that $U = \bigcup_{i=1}^n U_i$ and $F_i$ is a set of FDs over $U_i$
+
+A decomposition is good when it is:
+\begin{itemize}
+  \item Lossless \subitem if for every relation ove $U$ that satisfies $F$: \begin{itemize}
+          \item each $\pi_{U_i}(R)$ satisfies $F_i$, and
+          \item $R = \pi_{U_1}(R) \Join ... \Join \pi_{U_n}(R)$
+        \end{itemize}
+  \item Dependency \subitem if $F \equiv \bigcup_{i=1}^n F_i$
+\end{itemize}
+
+\subsubsection*{BCNF decomposition algorithm}
+\textbf{Input}: A set of attributes $U$ and set of FDs $F$\\
+\textbf{Output}: A database schema $S$
+
+\begin{enumerate}
+  \item $S := \{(U,F)\}$
+  \item While there is $(U_i,F_i) \in S$ not in BNCF, replace $(U_i,F_i)$ by:
+        \begin{enumerate}
+          \item Choose $(X \rightarrow Y)\in F$ that violates BNCF
+          \item Set $V:= C_F(X)$ ans $Z:= U-V$
+          \item Return $(V,\pi_V(F))$ and $(XZ,\pi_{XZ}(F))$
+        \end{enumerate}
+  \item Remove any $(U_i, F_i)$ for which there is $(U_j,F_j)$ with $U_i \subseteq U_j$
+  \item Return $S$
+\end{enumerate}
+
+\textbf{Properties of the BCNF algorithm} \begin{itemize}
+  \item decomposed schema is in BNCF and lossless-join
+  \item output depends on the FDs chosen to decompose
+  \item Dependency preservation is not guaranteed
+\end{itemize}
+
+
+\section{Entailment of Constraints for FD}
+A set of constants $\sum$ implies (entails) a constraints $\phi$ ($\sum \models \phi$) if every instance that satisfies $\sum$ also satisfies $\phi$
+
+\subsection{Notation}
+If $A,B$ are attributes then $AB$ denotes the set $\{A,B\}$\\
+
+If $X,Y$ are sets of attributes then $AB$ denotes their union $X\cup Y$\\
+
+If $X,A$ are set of attributes and attribute resp. then $XA$ denotes $X\cup\{A\}$
+
+\subsection{Armstring's axioms (FD)}
+\begin{itemize}
+  \item \textbf{Reflexivitiy} If $Y \subseteq X$ then $X \rightarrow Y$
+  \item \textbf{Augmentation} If $X \rightarrow Y$ then $XZ \rightarrow YZ \forall Z$
+  \item \textbf{Transitivity} If $X \rightarrow Y$ and $Y \rightarrow Z$ then $X \rightarrow Z$
+  \item \textbf{Union}        If $X \rightarrow Y$ and $Z \rightarrow Z$ then $X \rightarrow YZ$
+  \item \textbf{Decompsition} If $X \rightarrow YZ$ then $X \rightarrow Y$ and $X \rightarrow Z$
+\end{itemize}
+
+\subsection{Closure if a set (FD)}
+Let $F$ be a set of FDs
+
+The closure of $F$, $F^+$ is the see of all FDs implied by the FDs in $F$
+
+Example: CLosure if $\{A \rightarrow B, B \rightarrow C\}$
+
+\subsection{Attribute closure}
+The closure $C_F(X)$ of a set $X$ of attributes w.r.t. a set $F$ of FDs is the set of attributes we can derive from $X$ using the FDs in $F$
+\subsubsection*{Properties}
+\begin{itemize}
+  \item $X \subseteq C_F(X)$
+  \item if $X \subseteq Y$ then $C_F(X) \subseteq C_F(Y)$
+  \item $C_F(C_F(X)) = C_F(X)$
+\end{itemize}
+
+\subsection{Implication of IND}
+Given a set of INDs
+
+\subsubsection*{Axiomatization}
+\begin{itemize}
+  \item \textbf{Reflexivity} $R[X] \subseteq R[X]$
+  \item \textbf{Transitivity} If $R[X] \subseteq S[Y]$ and $S[Y] \subseteq T[Z]$ then $R[X] \subseteq T[Z]$
+  \item \textbf{Projection} If $R[X,Y] \subseteq S[W,Z]$ with $|X| = |W|$ then $R[X] \subseteq S[W]$
+  \item \textbf{Permutation} If $R[A_1,...,A_n] \subseteq S[B_1,...,B_n]$ then $R[A_{i_1},...,A_{i_n}] \subseteq S[B_{i_1},...,B_{i_n}]$ where $i_1,...,i_n$ is a permutation of $1,...,n$
+\end{itemize}
+
+\section{Transaction Management}
+\subsection{Transactions}
+A transaction is a sequence of operationson database objects, where all operations together form a single logical unit
+\subsection{Life-cycle of a transaction}
+Check page 2 on LT slide 15 \textbf{Transaction Management}
+\subsection{Schedules}
+A schedule is a sequence $S$ of operations from a set of transactions
+where the order of operations of each $T_i$ is the same as in $S$
+
+A schedule is serial if all operations of each transaction are executed before or after all operations of another
+
+\begin{multicols}{3}
+  \[\begin{split}
+      T_1&: \text{op1, op2, op3}\\
+      T_2&: \text{op1, op2}
+    \end{split}\]
+  \newline
+  \begin{center}
+    Concurrent schedule
+    \begin{tabular}{c|c|c}
+        & $T_1$ & $T_2$ \\ \hline
+      1 &       & op1   \\
+      2 & op1   &       \\
+      3 & op2   &       \\
+      4 &       & op2   \\
+      5 & op3   &
+    \end{tabular}
+  \end{center}
+  \begin{center}
+    Serial schedule
+    \begin{tabular}{c|c|c}
+        & $T_1$ & $T_2$ \\ \hline
+      1 &       & op1   \\
+      2 &       & op2   \\
+      3 & op1   &       \\
+      4 & op2   &       \\
+      5 & op3   &
+    \end{tabular}
+  \end{center}
+\end{multicols}
+
+\subsection{Concurrency}
+\begin{itemize}
+  \item Typically more than one transaction runs on a system
+  \item Each transation consists of many I/O and CPU operations
+  \item We don’t want to wait for a transaction to completely finish before executing another
+\end{itemize}
+
+\subsubsection*{Concurrent execution}
+The operations of different transaction are interleaved
+\begin{itemize}
+  \item increase throughput
+  \item reduce response time
+\end{itemize}
+
+\subsection{The ACID properties}
+\begin{itemize}
+  \item \textbf{A}tomicity: Either all or none operations are carried out
+  \item \textbf{C}onsistency: Successful execution of a transaction leaves the database in a coherent state
+  \item \textbf{I}solation: Each transaction is protected from the effects of other transactions executed concurrently
+  \item \textbf{D}urability: On successful completion, changes persist
+\end{itemize}
+
+\subsection{Transaction model}
+\textbf{Important operations}: read $r(A)$, write $w(A)$ data item $A$
+\textbf{Example}:
+\begin{itemize}
+  \item $T_1$: $r(A),w(A),r(B),w(B)$
+  \item $T_2$: $r(A),w(A),r(B),w(B)$
+\end{itemize}
+A schedule of a transaction model will ne the same tabel from above but have operations in the form $r(A),w(A)$
+
+\subsection{Serialisation}
+Two operation are Conflicting if:
+\begin{itemize}
+  \item they refer t the same data item, and
+  \item at least one if them is a write operation
+\end{itemize}
+
+Consecutive non-Conflicting operations can be swapped within the schedule
+
+A schedule is conflict serializable if it can be transformed into a serial schedule by a sequence of swap operations
+
+\subsection{Precedure graph}
+Captures all potential conflicts between transactions
+\begin{itemize}
+  \item each node is a transaction
+  \item There is an edge fro $T_i$ to $T_j$ for $T_i \neq T_j$ if $T_i$ precedes and conflicts with any $T_j$'s actions
+\end{itemize}
+Examples in slide
+
+\subsection{Lock-based concurrency control}
+\begin{itemize}
+  \item $s(A)$: shared lock on, $A$ acquired, $A$ is available for read to owner and can be acquired by more than one transaction
+  \item $\times(A)$: Exclusive lock on $A$ acquired, $A$ is available for read/write to owner cannot be acquired by other transactions
+  \item $u(A)$: unlock  $A$
+  \item Abort: transaction aborts, schedule recoverable
+  \item Commit: transaction commits, schedule unrecoverable
+\end{itemize}
+
+\subsubsection*{Two-Phase Locking}
+Before reading/writing a data item a transaction must acquire a shared/exclusive lock on item
+
+A transaction cannot request additional locks once it releases any lock.
+
+Each transaction has:
+\begin{enumerate}
+  \item Growing phase: when locks are acquired
+  \item Shrinking phaseL when locks are released
+\end{enumerate}
+
+Every completed schedule of committed transactions that follow the 2PL protocol is conflict serializable
+
+\subsection*{Strict 2PL}
+
+Before reading/writing a data item a transaction must acquire a shared/exclusive lock on item
+
+All locks held by a transaction are released when the transaction is completed (aborts or commits)
+
+This can ensure that:
+\begin{itemize}
+  \item The schedule is always recoverable
+  \item All aborted transactions can be rolled back without cascading aborts
+  \item The schedule consisting of the committed transactions is conflict serializable
+\end{itemize}
+
+\subsection*{Deadlocks}
+A transaction requesting a lock must wait until all conflicting locks are released
+
+A deadlock can be causes as simple as A waiting B to unlock a data item, while, B is also waiting A to unlock another data item.
+
+\subsubsection*{Deadlock prevention}
+Each transaction is assigned a priority using a timestamp: The older a transaction is, the higher priority it has
+
+Suppose $T$ requests a lock but $S$ holds a conflicting lock, there are two ways to prevent deadlock:
+\begin{itemize}
+  \item Wait-die: $T$ wait if it has higher priority, other aborted
+  \item Wound-wait: Abort $S$ if $T$ has higher priority, otherwise $T$ waits.
+\end{itemize}
+In both policies, the one has higher priority is never aborted.
+
+\subsubsection*{Deadlock detection}
+\begin{enumerate}
+  \item Waits-for graph
+        \begin{itemize}
+          \item Nodes are avtive transactions
+          \item If $T$ waits $S$ to release a lock then edge $T\rightarrow S$ exists
+        \end{itemize}
+  \item Recovering from deadlocks
+        \begin{itemize}
+          \item Choose a minimal set of transactions such that rolling them back will make the waits-for graph acyclic
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Crash Recovery}
+The log records every action executed on the databass, where each log record has a unique ID called log sequence number (LSN)
+
+Fields in a log record:
+\begin{itemize}
+  \item LSN: record id
+  \item prevLSN: previous record LSN
+  \item transID: ID of the transaction
+  \item type: type of recorded action
+  \item before: value before change
+  \item afrer: value after change
+\end{itemize}
+
+\subsection{Recovery algorithm/ARIES}
+\begin{enumerate}
+  \item Analysis \begin{itemize}
+          \item identify changes that have not been written to disk
+          \item identify active transactions at the time of crash
+        \end{itemize}
+  \item record \begin{itemize}
+          \item repeat all actions starting from latest checkpoint
+          \item restore the database to the state at the time of crash
+        \end{itemize}
+  \item Undo \begin{itemize}
+          \item undo actions of transactions that did not commit
+          \item the database reflects only actions of committed transactions
+        \end{itemize}
+\end{enumerate}
+
+\section{XML: Extensible Markup Language}
+
+XML is a format that is both \textit{human} and \textit{machine readable} and describes the structure of data.
+
+XML doesn't define how data should be displayed, rather it provides a \textit{model} for other applications to display it. This means that XML doesn't actually ``\textit{do}'' anything, and depends on some other application to do something with it.
+
+A similar language is HTML, which describes how data looks. XML focuses upon what data actually \textit{is}.
+
+XML allows for a developer to describe things, and ascribe \textit{attributes} to them. This allows for a tree to be drawn representing the hierarchy.
+
+\subsection{DTD: Document Type Definition}
+
+A DTD is \textit{grammar} that can be used in conjunction with XML documents, dictating which type of data some attribute can hold, what attributes an item has, and so on.
+
+\end{document}
