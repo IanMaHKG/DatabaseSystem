@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2019.11.5)  18 DEC 2019 02:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2019.11.5)  18 DEC 2019 03:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -419,6 +419,28 @@ Package: multicol 2019/03/01 v1.8w multicolumn formatting (FMi)
 \mult@nat@firstbox=\box67
 \colbreak@box=\box68
 \mc@col@check@num=\count142
+) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2018/04/16 v5.8 Page Geometry
+ (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+) (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count143
+\Gm@cntv=\count144
+\c@Gm@tempcnt=\count145
+\Gm@bindingoffset=\dimen198
+\Gm@wd@mp=\dimen199
+\Gm@odd@mp=\dimen256
+\Gm@even@mp=\dimen257
+\Gm@layoutwidth=\dimen258
+\Gm@layoutheight=\dimen259
+\Gm@layouthoffset=\dimen260
+\Gm@layoutvoffset=\dimen261
+\Gm@dimlist=\toks36
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) (/home/ian/Documents/Database System/notes.aux)
@@ -436,20 +458,20 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
 LaTeX Font Info:    ... okay on input line 21.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
 LaTeX Font Info:    ... okay on input line 21.
-\c@lstlisting=\count143
+\c@lstlisting=\count146
  ABD: EveryShipout initializing macros (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count144
-\scratchdimen=\dimen198
+\scratchcounter=\count147
+\scratchdimen=\dimen262
 \scratchbox=\box69
-\nofMPsegments=\count145
-\nofMParguments=\count146
-\everyMPshowfont=\toks36
-\MPscratchCnt=\count147
-\MPscratchDim=\dimen199
-\MPnumerator=\count148
-\makeMPintoPDFobject=\count149
-\everyMPtoPDFconversion=\toks37
+\nofMPsegments=\count148
+\nofMParguments=\count149
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count150
+\MPscratchDim=\dimen263
+\MPnumerator=\count151
+\makeMPintoPDFobject=\count152
+\everyMPtoPDFconversion=\toks38
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
  (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
@@ -458,9 +480,6 @@ Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 )) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO)
- (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
-)
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
@@ -473,83 +492,104 @@ Package grfext Info: Graphics extension search list:
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 27.
- (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(28.45276pt, 540.60236pt, 28.45276pt)
+* v-part:(T,H,B)=(19.34787pt, 796.67715pt, 29.02182pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=540.60236pt
+* \textheight=796.67715pt
+* \oddsidemargin=-43.81723pt
+* \evensidemargin=-43.81723pt
+* \topmargin=-89.92212pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 28.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-
-LaTeX Warning: No \author given.
-
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 31.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 32.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-Overfull \hbox (3.22148pt too wide) in paragraph at lines 31--32
-\OT1/cmr/m/n/10 Relation al-ge-bra can ex-press the same state-ments as SQL \OT1/pcr/m/n/10 SELECT-FROM-WHERE
- []
+) [1
 
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <8> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 122.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 185.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 123.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 186.
  (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 185.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 186.
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 185.
- [3] [4]
-Overfull \hbox (3.62296pt too wide) in paragraph at lines 242--243
-[]\OT1/cmr/m/n/10 Consider a database that holds \OT1/cmr/m/it/10 Na-tional In-sur-ance \OT1/cmr/m/n/10 num-bers and \OT1/cmr/m/it/10 em-ployee names\OT1/cmr/m/n/10 .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 256--257
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 186.
+ [2] [3]
+Underfull \hbox (badness 10000) in paragraph at lines 257--258
 
  []
 
-
-Overfull \hbox (5.12978pt too wide) in paragraph at lines 260--261
-[]\OT1/cmr/m/n/10 We say that an in-clu-sion de-pen-dency holds when $\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 A[]; [] ; A[]\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^R \OML/cmm/m/it/10 S\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 B[]; [] ; B[]\OT1/cmr/m/n/10 )$;
- []
-
-[5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15]
-Underfull \hbox (badness 10000) in paragraph at lines 712--713
+[4] [5] [6] [7] [8] [9] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 713--714
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 714--715
+Underfull \hbox (badness 10000) in paragraph at lines 715--716
 
  []
 
-[16]
-Overfull \hbox (35.73366pt too wide) in paragraph at lines 751--752
-[]\OT1/cmr/bx/n/10 Permutation \OT1/cmr/m/n/10 If $\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 A[]; :::; A[]\OT1/cmr/m/n/10 ] \OMS/cmsy/m/n/10 ^^R \OML/cmm/m/it/10 S\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 B[]; :::; B[]\OT1/cmr/m/n/10 ]$ then $\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 A[]; :::; A[]\OT1/cmr/m/n/10 ] \OMS/cmsy/m/n/10 ^^R \OML/cmm/m/it/10 S\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 B[]; :::; B[]\OT1/cmr/m/n/10 ]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 769--771
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 770--773
 
  []
 
-[17] [18] [19] [20] [21] (/home/ian/Documents/Database System/notes.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 770--773
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 770--773
+
+ []
+
+[12] [13] [14] (/home/ian/Documents/Database System/notes.aux) ) 
 Here is how much of TeX's memory you used:
- 15007 strings out of 492167
- 282319 string characters out of 6127803
- 531515 words of memory out of 5000000
- 19066 multiletter control sequences out of 15000+600000
+ 15500 strings out of 492167
+ 289540 string characters out of 6127803
+ 556823 words of memory out of 5000000
+ 19549 multiletter control sequences out of 15000+600000
  13037 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,17n,54p,851b,1617s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on "/home/ian/Documents/Database System/notes.pdf" (21 pages, 284618 bytes).
+ 60i,17n,54p,851b,1615s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on "/home/ian/Documents/Database System/notes.pdf" (14 pages, 289072 bytes).
 PDF statistics:
- 157 PDF objects out of 1000 (max. 8388607)
- 112 compressed objects within 2 object streams
+ 138 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

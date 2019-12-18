@@ -8,7 +8,7 @@
 \usepackage{tikz}
 \usepackage{tikz-qtree}
 \usepackage{multicol}
-
+\usepackage[a4paper, total={19cm, 28cm}]{geometry}
 
 \lstset{
 language=sql,
@@ -23,6 +23,7 @@ basicstyle=\footnotesize\ttfamily
 
 % Title declaration
 \title{Database Systems Notes}
+\author{Ian S.W. Ma}
 \date{}
 \maketitle
 
@@ -767,20 +768,21 @@ A schedule is serial if all operations of each transaction are executed before o
       T_1&: \text{op1, op2, op3}\\
       T_2&: \text{op1, op2}
     \end{split}\]
-  \newline
+    \linebreak
+    \linebreak
   \begin{center}
-    Concurrent schedule
+    Concurrent schedule\\
     \begin{tabular}{c|c|c}
         & $T_1$ & $T_2$ \\ \hline
       1 &       & op1   \\
       2 & op1   &       \\
       3 & op2   &       \\
       4 &       & op2   \\
-      5 & op3   &
+      5 & op3   &\\
     \end{tabular}
   \end{center}
   \begin{center}
-    Serial schedule
+    Serial schedule\\
     \begin{tabular}{c|c|c}
         & $T_1$ & $T_2$ \\ \hline
       1 &       & op1   \\
